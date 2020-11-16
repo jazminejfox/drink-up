@@ -5,11 +5,13 @@
 You have roughly 24 hours to produce something compelling using the skills you've honed over the past five weeks.
 
 __Q:__ What are your inputs?
+
 __A:__ (Roughly) 24 hours of (relatively) undivided attention
 
 <br>
 
 __Q:__ What is the required output?
+
 __A:__ A compelling product presentation delivered to your classmates.
 
 ### Getting Started:
