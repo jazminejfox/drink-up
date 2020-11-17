@@ -1,6 +1,8 @@
 // TODO
 const express = require('express');
 const path = require('path'); // NEW
+const { Recipes } = require('./api/recipes');
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -10,13 +12,23 @@ const mockResponse = {
   foo: 'bar',
   bar: 'foo'
 };
+
 app.use(express.static(DIST_DIR)); // NEW
+app.use('/api/recipes', express.json());
+app.use('/api/recipes', Recipes);
+
 app.get('/api', (req, res) => {
   res.send(mockResponse);
 });
-app.get('/', (req, res) => {
- res.sendFile(HTML_FILE); // EDIT
-});
+
+// app.get('/', (req, res) => {
+//  res.sendFile(HTML_FILE); // EDIT
+// });
+
 app.listen(port, function () {
  console.log('App listening on port: ' + port);
 });
+
+module.exports = {
+  app,
+};

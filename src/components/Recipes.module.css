@@ -1,0 +1,31 @@
+.recipe {
+  border-radius: 20px;
+  box-shadow: -5px -5px 20px rgb(206, 206, 206), 0px 5px 20px rgb(206, 206, 206);
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: white;
+  align-items: center;
+  min-width: 40%;
+  padding: 0 2em 1em 2em;
+}
+
+.img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+
+.btn {
+  all: unset;
+}
+
+.btn:hover {
+  text-shadow: 0 0 4px #888;
+}
+
+.btn:active {
+  text-shadow: 0 0 2px #888;
+}
+

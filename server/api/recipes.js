@@ -1,0 +1,65 @@
+//EXPRESS
+const { Router } = require('express');
+const Recipes = Router();
+//DB
+// const { connect } = require('mysql2');
+const db = require('../db');
+//AXIOS
+const axios = require('axios');
+
+//REQUESTING API INFO
+Recipes.get('/', (req, res) => {
+
+//making a GET request to thecoctakdb API
+axios.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
+.then((response) => {
+//sending the response object from the API to the client
+  res.send(response.data.drinks);
+})
+.catch((err) => {
+//if it didnt workingsending our error
+  console.log(err, 'nah')
+})
+
+});
+
+
+
+//POSTING TO THE DATABASE
+Recipes.post('/', (req, res) => {
+
+//deconstructing, creating SQL request, and values variable
+const { title, image, id, instructions } = req.body
+let sql = `INSERT INTO drinks (drinkname, imageroute, id, instructions) values (?, ?, ?, ?)`;
+let values = [title, image, Number(id), instructions];
+
+//connecting to database and inserting
+db.connection.query(sql, values, (err, result) => {
+      err ? console.log(err) : console.log('drink inserted');
+    });
+
+//sending confirmation response to the client
+res.send('added to database, niceeee');
+
+})
+
+
+
+//DELETING FROM DATABASE
+Recipes.delete('/', (req, res) => {
+
+//deconstructing, creating SQL request, and values variable
+const { title } = req.body
+let sql = 'DELETE FROM drinks WHERE drinkname = ' + `'${title}'`;
+
+//connecting to database and deleting
+db.connection.query(sql, (err, result) => {
+  err ? console.log(err) : console.log('number of rows deleted ' + result.affectedRows);
+});
+
+})
+
+module.exports = {
+  Recipes,
+};
+
