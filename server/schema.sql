@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS drinkupdata;
 CREATE DATABASE drinkupdata;
 USE drinkupdata;
 
@@ -5,7 +6,8 @@ CREATE TABLE drinks (
   id integer,
   drinkname TEXT,
   instructions TEXT,
-  imageroute TEXT
+  imageroute TEXT,
+  comments TEXT
 );
 
 /*

@@ -7,8 +7,10 @@
   justify-content: space-around;
   background: white;
   align-items: center;
-  min-width: 40%;
+  min-width: 300px;
   padding: 0 2em 1em 2em;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .img {
@@ -19,6 +21,8 @@
 
 .btn {
   all: unset;
+  margin: 0 .5em;
+  font-size: 2.0em;
 }
 
 .btn:hover {
@@ -27,5 +31,12 @@
 
 .btn:active {
   text-shadow: 0 0 2px #888;
+}
+
+.btngrp {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
 }
 

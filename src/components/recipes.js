@@ -52,9 +52,11 @@ const Drinks = ({ title, instructions, image, ingredients, id }) => {
       <h1>{title}</h1>
       <img src= {image} alt="" className={style.img}/>
       <p>{instructions}</p>
+      <div className={style.btngrp}>
       <button className={style.btn} onClick={() => saveDrink({title, image, instructions, id})}>🧡</button>
       <button className={style.btn} onClick={() => deleteDrink({title, image, instructions, id})}>💔 </button>
       <button className={style.btn}>✍</button>
+      </div>
   </div>
   );
 

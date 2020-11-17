@@ -1,6 +1,7 @@
-.App {
+.app {
   min-height: 100vh;
   background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  font-family: 'Quicksand', sans-serif;
 }
 
 .search-form{
@@ -13,7 +14,14 @@
 .search-bar{
   width: 50%;
   border: none;
+  outline: none;
+  box-shadow: 0 0 6px #ddd;
   padding: 10px;
+  border-radius: .25em;
+}
+
+.search-bar:focus{
+  box-shadow: 0 0 4px #ccc inset;
 }
 
 .search-button{

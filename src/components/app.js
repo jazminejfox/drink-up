@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Drinks from './recipes';
 
-import './App.css';
+import appStyle from './app.css';
 
 const App = () => {
 
@@ -56,8 +56,8 @@ const App = () => {
   }
 
   return (
-  <div>
-    <h1>DrinkUp!🍺 </h1>
+  <div className='app'>
+    <h1 style={{marginTop: 0}}>DrinkUp!🍺</h1>
     <form className= "search-form">
       <input className= "search-bar" type='text' />
       <button className= 'search-button' type='submit'>
