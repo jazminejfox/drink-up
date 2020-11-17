@@ -59,6 +59,18 @@ db.connection.query(sql, (err, result) => {
 
 })
 
+
+
+//REQUESTING FAVORITE INFO
+Recipes.get('/favorites', (req, res) => {
+
+//connecting to database and requesting all info from the saved drinks table
+  db.connection.query('SELECT * FROM drinks', ((err, data) => {
+    err ? callback(err) : res.send(data);
+  }));
+
+});
+
 module.exports = {
   Recipes,
 };

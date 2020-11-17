@@ -23,6 +23,38 @@ const App = () => {
     });
   }
 
+  const getFavorites = () => {
+    return axios.get('api/recipes/favorites')
+    .then((response) => {
+      console.log('original state', recipes);
+
+      let drinkArray = response.data.reduce((arr, drinkObj) => {
+        let drink = {
+          strDrink: drinkObj.drinkname,
+          strInstructions: drinkObj.instructions,
+          strDrinkThumb: drinkObj.imageroute
+        }
+        arr.push(drink);
+        return arr;
+      }, []);
+      console.log('new drinkarray', drinkArray);
+
+      setRecipes(drinkArray);
+      console.log('getFavorites ran, this is your new state', recipes);
+    })
+    .catch((error) => {
+      console.log(error, 'getFavorites failed');
+    })
+  };
+
+  const filterHandle = (e) => {
+    if(e.target.value === 'all'){
+      getDrinks();
+    } else if (e.target.value === 'favorites'){
+      getFavorites();
+    }
+  }
+
   return (
   <div>
     <h1>DrinkUp!🍺 </h1>
@@ -31,7 +63,13 @@ const App = () => {
       <button className= 'search-button' type='submit'>
         Search
       </button>
-      </form>
+      <div className="select">
+          <select onChange={filterHandle} name="select" className="filter">
+          <option value="all">All</option>
+          <option value="favorites">Favorites</option>
+    </select>
+    </div>
+    </form>
       <div className= 'recipes'>
       {recipes.map((recipe, i) => (
         <Drinks key={i}
