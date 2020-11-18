@@ -86,6 +86,18 @@ const { comment, drink } = req.body;
 
   });
 
+
+Recipes.post('/comments', (req, res) => {
+  const { title } = req.body
+
+let sql = `SELECT comments FROM drinks WHERE drinkname = '${title}'`
+//connecting to database and requesting all info from the saved drinks table
+db.connection.query(sql, ((err, data) => {
+  err ? callback(err) : res.send(data[0].comments);
+}));
+
+});
+
 module.exports = {
   Recipes,
 };

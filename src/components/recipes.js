@@ -49,7 +49,7 @@ const Drinks = ({ title, instructions, image, ingredients, id }) => {
      console.log(comment, drink);
     return axios.post('api/recipes/favorites', {comment: comment, drink: drink})
     .then((response) => {
-      console.log(response, 'comment succesful')
+      console.log(response, 'comment successful')
     })
     .catch((error) => {
       console.log(error, 'comment failed')
@@ -62,6 +62,21 @@ const Drinks = ({ title, instructions, image, ingredients, id }) => {
     leaveComment(val, title);
   }
 
+  const displayComment = (title) => {
+
+    console.log(title);
+
+    return axios.post('api/recipes/comments', title)
+    .then((response) => {
+      console.log(response.data, 'comment retrieved')
+      window.alert('You said: ' + response.data)
+    })
+    .catch((error) => {
+      console.log(error, 'comment retrival failed')
+    })
+  };
+
+
   return (
   <div className={style.recipe}>
       <h1>{title}</h1>
@@ -72,7 +87,7 @@ const Drinks = ({ title, instructions, image, ingredients, id }) => {
       <button className={style.btn} onClick={() => deleteDrink({title, image, instructions, id})}>💔 </button>
       <button className={style.btn} onClick={() => comment()}>✍</button>
       <br></br>
-      <h3>Comments...</h3>
+      <h3 onClick={() => displayComment({title})}>Comments...</h3>
       </div>
   </div>
   );
