@@ -71,6 +71,21 @@ Recipes.get('/favorites', (req, res) => {
 
 });
 
+
+Recipes.post('/favorites', (req, res) => {
+const { comment, drink } = req.body;
+
+  let sql = `UPDATE drinks SET comments = '${comment}' WHERE drinkname = '${drink}'`
+
+  //connecting to database and requesting all info from the saved drinks table
+  db.connection.query(sql, ((err, result) => {
+    err ? callback(err) : console.log('number of rows updated' + result.affectedRows);
+  }));
+
+  res.send('Comment succesful!');
+
+  });
+
 module.exports = {
   Recipes,
 };
