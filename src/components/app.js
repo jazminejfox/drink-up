@@ -7,6 +7,8 @@ import appStyle from './app.css';
 const App = () => {
 
   const [recipes, setRecipes] = useState([]);
+  const [search, setSearch] = useState('');
+
 
   useEffect(() => {
     getDrinks();
@@ -23,8 +25,25 @@ const App = () => {
     });
   }
 
+  const updateSearch = e => {
+    setSearch(e.target.value);
+    console.log(search);
+  }
+
+  const runSearch = (e) => {
+    e.preventDefault();
+    return axios.get('api/recipes/search', {params : search})
+     .then((response) => {
+         setRecipes(response.data);
+         console.log('search ran, recipes state set')
+     })
+     .catch((error) => {
+       console.log(error, 'getDrinks failed')
+     });
+   }
+
   const getFavorites = () => {
-    return axios.get('api/recipes/favorites')
+     axios.get('api/recipes/favorites')
     .then((response) => {
       console.log('original state', recipes);
 
@@ -34,8 +53,8 @@ const App = () => {
           strInstructions: drinkObj.instructions,
           strDrinkThumb: drinkObj.imageroute
         }
-        arr.push(drink);
-        return arr;
+        // arr.push(drink);
+        return [...arr, drink];
       }, []);
       console.log('new drinkarray', drinkArray);
 
@@ -57,9 +76,9 @@ const App = () => {
 
   return (
   <div className='app'>
-    <h1 style={{marginTop: 0}}>DrinkUp!🍺</h1>
-    <form className= "search-form">
-      <input className= "search-bar" type='text' />
+    <h1 className='header'>DrinkUp!🍺</h1>
+    <form className= "search-form" onSubmit={runSearch}>
+      <input className= "search-bar" type='text' value={search} onChange={updateSearch}/>
       <button className= 'search-button' type='submit'>
         Search
       </button>
@@ -73,6 +92,8 @@ const App = () => {
       <div className= 'recipes'>
       {recipes.map((recipe, i) => (
         <Drinks key={i}
+        filterHandle={filterHandle}
+        getFavorites={getFavorites}
         id={recipe.idDrink}
         title={recipe.strDrink}
         instructions={recipe.strInstructions}

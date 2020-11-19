@@ -3,7 +3,7 @@ import axios from 'axios';
 import style from './Recipes.module.css';
 
 
-const Drinks = ({ title, instructions, image, ingredients, id }) => {
+const Drinks = ({ title, instructions, image, ingredients, id, getFavorites, filterHandle }) => {
 
 
  const saveDrink = (title, image, instructions, id) => {
@@ -37,6 +37,7 @@ const Drinks = ({ title, instructions, image, ingredients, id }) => {
      };
    return axios.delete('api/recipes', {data: drinkObj.title})
    .then((response) => {
+      filterHandle({target: {value: 'favorites'}});
      console.log(response.data, 'DELETE successful');
    })
    .catch((error) => {
@@ -75,7 +76,6 @@ const Drinks = ({ title, instructions, image, ingredients, id }) => {
       console.log(error, 'comment retrival failed')
     })
   };
-
 
   return (
   <div className={style.recipe}>

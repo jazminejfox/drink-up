@@ -98,6 +98,26 @@ db.connection.query(sql, ((err, data) => {
 
 });
 
+//RUNNING A SEARCH
+//REQUESTING API INFO
+Recipes.get('/search', (req, res) => {
+
+  let searchItem = Object.values(req.query).join('').replace(/\s/g, '') || '';
+  console.log(searchItem); //works
+
+  //making a GET request to thecoctakdb API
+  axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchItem}`)
+  .then((response) => {
+  //sending the response object from the API to the client
+    res.send(response.data.drinks);
+  })
+  .catch((err) => {
+  //if it didnt workingsending our error
+    console.log(err, 'nah')
+  })
+
+  });
+
 module.exports = {
   Recipes,
 };
